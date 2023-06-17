@@ -17,7 +17,7 @@ int jobScheduling(vector<vector<int>> &jobs)
         {
             if(d[i]==0)
             {
-                 d[i] = 1;
+                 d[i]++;
                  p+= it.first;
                  break;
             }
