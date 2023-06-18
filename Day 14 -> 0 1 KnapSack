@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+int helper(int i,int j,vector<int>&values,vector<int>&weights,vector<vector<int>>&dp)
+{
+  if(i>=values.size()) return 0;
+  if(dp[i][j]!=-1) return dp[i][j];
+  int ans = INT_MIN;
+  if(weights[i]<=j) ans = max(values[i]+helper(i+1,j-weights[i],values,weights,dp),helper(i+1,j,values,weights,dp));
+  else ans = helper(i+1,j,values,weights,dp);
+  return dp[i][j] = ans;
+}
+int maxProfit(vector<int> &values, vector<int> &weights, int n, int w)
+{
+	// Write your code here
+	   vector<vector<int>>dp(1010,vector<int>(1010,-1));
+       return helper(0,w,values,weights,dp);  
+}
