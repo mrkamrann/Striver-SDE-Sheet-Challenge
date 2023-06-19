@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	// Write your code here 
+	vector<int>hash(n+1,0);
+	pair<int,int>p;
+	for(auto it : arr)
+	{
+       hash[it]++;
+	   if(hash[it]>1) p.second = it;
+	}
+	for(int i = 1;i<=n;++i)
+	{
+       if(hash[i]==0)
+	   {
+		   p.first=i;
+		   return p;
+	   }
+	}
+
+	return p;
+	
+}
