@@ -1,0 +1,19 @@
+vector<int> stringMatch(string p, string s) {
+	// Write your code here.
+	vector<int>ans;
+	for(int i = 0;i<p.size();++i)
+    {
+        if(p[i]==s[0])
+        {
+            int j = i;
+            int k = 0;
+            while(j<p.size()&&k<s.size()&&p[j]==s[k])
+            {
+                j++;
+                k++;
+            }
+            if(k>=s.size()) ans.push_back(i+1);
+        }
+    }
+    return ans;
+}
