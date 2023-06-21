@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+
+void helper(int i,vector<int>&num, int sum,vector<int>&st)
+{
+
+  if(i==num.size())
+  {
+	  st.push_back(sum);
+	  return;
+  }
+  helper(i+1,num,sum+num[i],st);
+  helper(i+1,num,sum,st);
+
+}
+
+vector<int> subsetSum(vector<int> &num){
+	// Write your code here.
+	vector<int>st;
+	helper(0,num,0,st);
+    sort(st.begin(),st.end());
+	return st;
+}
