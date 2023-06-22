@@ -1,0 +1,9 @@
+#include <bits/stdc++.h> 
+bool areAnagram(string &str1, string &str2){
+    // Write your code here.
+    unordered_map<char,int>mpp;
+    for(auto it : str1) mpp[it]++;
+    for(auto it : str2) mpp[it]--;
+    for(auto it : mpp) if(it.second!=0) return 0;
+    return 1;
+}
