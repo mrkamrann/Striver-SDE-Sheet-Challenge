@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+int minTimeToRot(vector<vector<int>>& grid, int n, int m)
+{
+    // Write your code here. 
+     int cnt = 0;
+        int ans = 0;
+       
+        queue<pair<int,int>>q;
+        //unordered_map<pair<int,int>,int>mpp;
+        for(int i = 0;i<n;++i)
+        {
+          for(int j = 0;j<m;++j)
+          {
+            if(grid[i][j]==1) cnt++;
+            else if(grid[i][j]==2)
+            {
+              q.push({i,j});
+              //mpp[{i,j}]++;
+            }
+          }
+        }
+        if(cnt==0) return 0;
+        while(!q.empty())
+        {
+          ans++;
+          int sz = q.size();
+          for(int i = 0;i<sz;++i)
+          {
+            auto p = q.front();
+            q.pop();
+            if(p.first+1<n && grid[p.first+1][p.second]==1)
+            {
+                grid[p.first+1][p.second]=2;
+                q.push({p.first+1,p.second});
+                cnt--;
+            }
+            if(p.first-1>=0 && grid[p.first-1][p.second]==1)
+            {
+                grid[p.first-1][p.second]=2;
+                q.push({p.first-1,p.second});
+                cnt--;
+            }
+            if(p.second+1<m && grid[p.first][p.second+1]==1)
+            {
+                grid[p.first][p.second+1]=2;
+                q.push({p.first,p.second+1});
+                cnt--;
+            }
+            if(p.second-1>=0 && grid[p.first][p.second-1]==1)
+            {
+                grid[p.first][p.second-1]=2;
+                q.push({p.first,p.second-1});
+                cnt--;
+            }
+
+          }
+        }
+        if(cnt!=0) return -1;
+        return ans-1;
+}
