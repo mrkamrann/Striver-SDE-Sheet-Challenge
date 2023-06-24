@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+bool DFS(int vertex, int par,unordered_map<int,vector<int>>&mpp,vector<int>&vis)
+{
+  vis[vertex]++;
+  bool f = false;
+  for(auto it : mpp[vertex])
+  {
+    if(vis[it]&&it==par) continue;
+    if(vis[it]) return true;
+    f|= DFS(it,vertex,mpp,vis);
+  }
+
+   return f;
+}
+
+
+string cycleDetection (vector<vector<int>>& edges, int n, int m)
+{
+    // Write your code here.
+     unordered_map<int,vector<int>>mpp;
+    vector<int>vis(n+1,0);
+    for(auto it : edges)
+    {
+        mpp[it[0]].push_back(it[1]);
+        mpp[it[1]].push_back(it[0]);
+    }
+    bool f = 0;
+    for(int i = 0;i<=n;++i)
+    {
+        if(vis[i]) continue;
+        if(DFS(i,0,mpp,vis))
+        {
+            f = 1;
+            break;
+        }
+    }
+    if(f) return "Yes";
+    return "No";
+}
