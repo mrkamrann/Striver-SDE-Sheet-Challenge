@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+string reverseString(string &str){
+	// Write your code here.	
+
+	vector<string>v;
+	stringstream ss(str);
+	string word;
+	while(ss>>word) v.push_back(word);
+	reverse(v.begin(),v.end());
+    string ans="";
+	for(auto it : v)
+	{
+		ans+=it+" ";
+	}
+	ans.pop_back();
+
+	return ans;
+	
+}
