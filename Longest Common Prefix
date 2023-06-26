@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+string longestCommonPrefix(vector<string> &arr, int n)
+{
+    // Write your code here
+    string res="";
+    sort(arr.begin(),arr.end());
+    int i = 0, j = 0;
+    while(i<arr[0].size()&&j<arr[n-1].size()&&(arr[0][i]==arr[n-1][j]))
+    {
+        res.push_back(arr[0][i]);
+        i++;
+        j++;
+    }
+
+    return res;
+}
+
+
