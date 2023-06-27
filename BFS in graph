@@ -1,0 +1,33 @@
+#include <bits/stdc++.h> 
+vector<int> BFS(int v, vector<pair<int,int>> edges)
+{
+   map<int,set<int>> mp;
+   queue<int> q;
+   for(auto &x:edges){
+       mp[x.first].insert(x.second);
+       mp[x.second].insert(x.first);
+   }
+   vector<int> vis(v,0);
+   vector<int> ans;
+   q.push(0);
+   vis[0]=1;
+   ans.push_back(0);
+   while(!q.empty()){
+       int sz=q.size();
+       for(int i=0;i<sz;i++){
+           int r=q.front();
+           q.pop();
+           for(auto &x:mp[r]){
+               if(!vis[x]){
+                   ans.push_back(x);
+                   vis[x]=1;
+                   q.push(x);
+               }
+           }
+       }
+   }
+   for(int i=0;i<v;i++){
+       if(!vis[i]) ans.push_back(i);
+   }
+   return ans;
+}
