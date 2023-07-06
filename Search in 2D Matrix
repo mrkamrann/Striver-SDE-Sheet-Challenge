@@ -1,0 +1,9 @@
+#include <bits/stdc++.h>
+bool searchMatrix(vector<vector<int>>& mat, int target) {
+
+    for(auto &it : mat)
+    {
+      if(binary_search(it.begin(),it.end(),target)) return true;
+    } 
+    return false;
+}
