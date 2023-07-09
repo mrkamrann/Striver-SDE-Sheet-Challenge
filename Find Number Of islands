@@ -1,0 +1,36 @@
+void DFS(int i,int j,int n,int m,int** grid,vector<vector<int>>&vis)
+{
+    if(i<0||i>=n||j<0||j>=m||grid[i][j]==0||vis[i][j]!=0) return;
+    vis[i][j] = 1;
+    DFS(i+1,j,n,m,grid,vis);
+    DFS(i-1,j,n,m,grid,vis);
+    DFS(i,j-1,n,m,grid,vis);
+    DFS(i,j+1,n,m,grid,vis);
+    DFS(i+1,j+1,n,m,grid,vis);
+    DFS(i-1,j-1,n,m,grid,vis);
+    DFS(i+1,j-1,n,m,grid,vis);
+    DFS(i-1,j+1,n,m,grid,vis);
+}
+  
+  
+int getTotalIslands(int** grid, int n, int m)
+{
+   // Write your code here.
+    int cnt=0;
+    vector<vector<int>>vis(n,vector<int>(m,0));
+      for(int i=0;i<n;++i){
+        for(int j=0;j<m;++j){
+          if(grid[i][j]==1)
+          {
+            if(vis[i][j]!=0)continue;
+            else
+            {
+              cnt++;
+              DFS(i,j,n,m,grid,vis);
+            }
+          }
+          
+        }
+      }
+      return cnt;
+}
