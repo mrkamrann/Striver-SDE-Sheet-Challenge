@@ -1,0 +1,37 @@
+#include <bits/stdc++.h> 
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+void f(TreeNode<int>*root,priority_queue<int>&pq,int k)
+{
+    if(root==NULL) return;
+    f(root->left,pq,k);
+    pq.push(root->data);
+    if(pq.size()>k)pq.pop();
+    f(root->right,pq,k);
+}
+int kthSmallest(TreeNode<int> *root, int k)
+{
+	//	Write the code here.
+    priority_queue<int>pq;
+    f(root,pq,k);
+    return pq.top();
+
+
+}
