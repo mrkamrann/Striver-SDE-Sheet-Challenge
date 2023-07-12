@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+void DFS(int x, unordered_map<int,vector<int>>&mpp,vector<int>&ans, vector<bool>&vis)
+{
+    vis[x]=1;
+    for(auto it : mpp[x])
+    {
+       if(!vis[it]) DFS(it,mpp,ans,vis);
+    }
+     ans.push_back(x);
+}
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+    // Write your code here
+    unordered_map<int,vector<int>>mpp;
+    for(auto it : edges) mpp[it[0]].push_back(it[1]);
+    vector<int>ans;
+    vector<bool>vis(v,0);
+    for(int i = 0;i<v;++i)
+    {
+       if(!vis[i])
+       {
+           DFS(i,mpp,ans,vis);
+       }
+    }    
+    reverse(ans.begin(),ans.end());
+    return ans;
+}
