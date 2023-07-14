@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+void DFS(int i, int j,vector<vector<int>>&image,int nc,vector<vector<int>>&vis, int cc)
+{
+    if(i<0||i>=image.size()||j<0||j>=image[0].size()||vis[i][j]==1||image[i][j]!=cc) return;
+    vis[i][j] = 1;
+    image[i][j] = nc;
+    DFS(i+1,j,image,nc,vis,cc);
+    DFS(i-1,j,image,nc,vis,cc);
+    DFS(i,j-1,image,nc,vis,cc);
+    DFS(i,j+1,image,nc,vis,cc);
+    return;
+}
+vector<vector<int>> floodFill(vector<vector<int>> &image, int x, int y, int nc)
+{
+    vector<vector<int>>vis(55,vector<int>(55,0));
+    int cc = image[x][y];
+    DFS(x,y,image,nc,vis,cc);
+    return image;
+}
