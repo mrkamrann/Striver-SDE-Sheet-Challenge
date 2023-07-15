@@ -1,0 +1,87 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+#include <bits/stdc++.h>
+string serializeTree(TreeNode<int> *root)
+{
+ //    Write your code here for serializing the tree
+ if(root==NULL) return "";
+        string s;
+        queue<TreeNode<int>*>q;
+        q.push(root);
+        while(!q.empty())
+        {
+          int sz = q.size();
+          for(int i = 0;i<sz;++i)
+          {
+            auto tmp = q.front();
+            q.pop();
+            if(tmp==NULL) s.append("#,");
+            else s.append(to_string(tmp->data)+",");
+            
+            if(tmp!=NULL)
+            {
+              q.push(tmp->left);
+              q.push(tmp->right);
+            }
+          }
+        }
+       
+        return s;
+
+}
+
+TreeNode<int>* deserializeTree(string &data)
+{
+ //    Write your code here for deserializing the tree
+       if(data=="") return NULL;
+       stringstream s(data);
+       string str;
+       getline(s,str,',');
+       queue<TreeNode<int>*>q;
+       TreeNode<int>* root = new TreeNode<int>(stoi(str));
+       q.push(root);
+       while(!q.empty())
+       {
+         auto node = q.front();
+         q.pop();
+         getline(s,str,',');
+         if(str=="#")  node->left = NULL;
+         else
+         {
+           TreeNode<int>* tmp = new TreeNode<int>(stoi(str));
+           node->left=tmp;
+           q.push(tmp);
+         }
+         getline(s,str,',');
+         if(str=="#")  node->right = NULL;
+         else
+         {
+           TreeNode<int>* tmp = new TreeNode<int>(stoi(str));
+           node->right=tmp;
+           q.push(tmp);
+         }
+       } 
+
+       return root;
+
+}
+
+
+
