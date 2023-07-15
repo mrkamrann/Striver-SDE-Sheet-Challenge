@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+vector<int> findMedian(vector<int> &arr, int n){
+	
+	// Write your code here 
+	priority_queue<int>mxh;
+	priority_queue<int,vector<int>,greater<int>>mnh;
+	vector<int>ans;
+	for(auto it : arr)
+	{
+		if(mxh.empty() || mxh.top()>=it) mxh.push(it);
+		else mnh.push(it);
+		if((int)mxh.size()-(int)mnh.size() > 1)
+		{
+          mnh.push(mxh.top());
+		  mxh.pop();
+		}
+		else if((int)mnh.size()-(int)mxh.size() > 1)
+		{
+          mxh.push(mnh.top());
+		  mnh.pop();
+		}
+		if(mxh.size()==mnh.size()) ans.push_back((mxh.top()+mnh.top())/2);
+	    else if(mnh.size()>mxh.size()) ans.push_back(mnh.top());
+	    else ans.push_back(mxh.top());
+	}
+	return ans;
+	
+}
