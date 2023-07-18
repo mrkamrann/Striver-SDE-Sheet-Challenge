@@ -1,0 +1,97 @@
+bool checkPalindrome(LinkedListNode<int>* head_data,LinkedListNode<int>* middle_next){
+
+    while(middle_next !=NULL){
+
+        if(head_data->data!= middle_next->data){
+
+            return 0;
+
+        }
+
+        head_data=head_data->next;
+
+        middle_next=middle_next->next;
+
+    }
+
+    return 1;
+
+}
+
+ 
+
+LinkedListNode<int>* mid(LinkedListNode<int> *head){
+
+    LinkedListNode<int> *slow=head ,*fast=head->next;
+
+    while(fast!=NULL && fast->next!=NULL){
+
+        fast=fast->next->next;
+
+        slow=slow->next;
+
+    }
+
+    return slow;
+
+}
+
+ 
+
+LinkedListNode<int>* reverse(LinkedListNode<int> *temp){
+
+    LinkedListNode<int>* prev=NULL;
+
+    LinkedListNode<int>* current=temp;
+
+    LinkedListNode<int>* forward=temp;
+
+    while(current !=NULL){
+
+        forward=forward->next;
+
+        current->next=prev;
+
+        prev=current;
+
+        current=forward;
+
+    }
+
+    return prev;
+
+}
+
+ 
+
+bool isPalindrome(LinkedListNode<int> *head) {
+
+    if (head==NULL || head->next==NULL){
+
+        return true;
+
+    }
+
+   LinkedListNode<int> *middle=mid(head);
+
+   LinkedListNode<int> *temp=middle->next;
+
+   middle->next=reverse(temp);
+
+   LinkedListNode<int> *middle_next=middle->next;
+
+    LinkedListNode<int>* head_data=head;
+
+   if (checkPalindrome(head_data,middle_next)){
+
+       return true;
+
+   } 
+
+   else {
+
+     return false;
+
+   }
+
+}
