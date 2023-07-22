@@ -1,0 +1,55 @@
+#include <bits/stdc++.h> 
+
+ 
+
+void permutations(string &s,string &ds,vector<string>&ans,int freq[]){
+
+    if(ds.size()==s.size()){
+
+        ans.push_back(ds);
+
+        return;
+
+    }
+
+ 
+
+    for(int i=0;i<s.size();i++){
+
+        if(!freq[i]){
+
+            ds.push_back(s[i]);
+
+            freq[i]=1;
+
+            permutations(s,ds,ans,freq);
+
+            ds.pop_back();
+
+            freq[i]=0;
+
+        }
+
+    }
+
+}
+
+ 
+
+vector<string> findPermutations(string &s) {
+
+    // Write your code here.
+
+    string ds;
+
+    vector<string>ans;
+
+    int freq[s.size()];
+
+    for(int i=0;i<s.size();i++) freq[i]=0;
+
+    permutations(s, ds, ans,freq);
+
+    return ans;
+
+}
