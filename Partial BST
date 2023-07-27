@@ -1,0 +1,9 @@
+bool help(BinaryTreeNode<int> *root,int l,int u){
+    if(root==NULL)return true;
+    if(root->data>u || root->data<l)return false;
+    return help(root->right,root->data,u) && help(root->left,l,root->data);
+}
+bool validateBST(BinaryTreeNode<int> *root) {
+    // Write your code here
+    return help(root,-INT_MIN,INT_MAX);
+}
