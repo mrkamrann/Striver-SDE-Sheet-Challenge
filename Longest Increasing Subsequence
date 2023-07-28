@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+
+ 
+
+int longestIncreasingSubsequence(int arr[], int n)
+
+{
+
+    // Write Your Code here
+
+  vector<int> dp;
+
+  dp.push_back(arr[0] );
+
+  //here we are maintaining an array that will be updated on encountering a new element so this array would keep the current increasing array
+
+  for( int i = 1 ; i<n ;i++ ) 
+
+  {
+
+      int it = lower_bound( dp.begin() , dp.end() , arr[i] ) - dp.begin();
+
+ 
+
+      if( it == dp.size() )
+
+      {
+
+        dp.push_back( arr[i] );//if this is the largest till now then we would increase array
+
+      }
+
+      else
+
+      {
+
+        dp[it] = arr[i];//if in between then we would update that position
+
+      }
+
+  }
+
+ 
+
+  return dp.size();
+
+}
