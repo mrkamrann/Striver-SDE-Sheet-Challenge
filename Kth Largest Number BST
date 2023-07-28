@@ -1,0 +1,35 @@
+void reverseinorder(TreeNode<int>*root,vector<int> &ans)
+
+{
+
+    if (root==NULL)
+
+    return ;
+
+    reverseinorder(root->right,ans);
+
+    ans.push_back(root->data);
+
+    reverseinorder(root->left,ans);
+
+}
+
+int KthLargestNumber(TreeNode<int>* root, int k) 
+
+{
+
+    // Write your code here.
+
+    vector<int>ans;
+
+    reverseinorder(root,ans);
+
+    if(k>ans.size())
+
+    return -1;
+
+ 
+
+    return ans[k-1];
+
+}
